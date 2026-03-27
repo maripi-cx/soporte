@@ -52,6 +52,17 @@
   <span>Actualizacion masiva de articulos Intercom</span>
 </div>
 
+<div id="login-screen" style="display:flex;align-items:center;justify-content:center;min-height:100vh;background:#f1f5f9;">
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:36px 32px;max-width:360px;width:100%;text-align:center;">
+    <h2 style="font-size:18px;font-weight:700;margin-bottom:6px;">Chipax - Editor de Help Center</h2>
+    <p style="font-size:13px;color:#64748b;margin-bottom:24px;">Ingresa la clave de acceso para continuar.</p>
+    <input type="password" id="access-key" placeholder="Clave de acceso..." style="margin-bottom:10px;text-align:center;"/>
+    <button onclick="checkAccess()" style="background:#1e293b;color:#fff;width:100%;padding:11px;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;margin-top:4px;">Entrar</button>
+    <p id="login-error" style="color:#dc2626;font-size:13px;margin-top:10px;display:none;">Clave incorrecta. Intenta de nuevo.</p>
+  </div>
+</div>
+
+<div id="app-screen" style="display:none;">
 <div class="container">
 
   <div class="card">
@@ -91,6 +102,7 @@
     <div class="card" id="tab-content"></div>
   </div>
 
+</div>
 </div>
 
 <script>
@@ -331,7 +343,20 @@ function publicar(id, idx) {
   });
 }
 
-updateKeysStatus();
+  function checkAccess() {
+    var key = document.getElementById("access-key").value;
+    if (key === "RECURSOS2026") {
+      document.getElementById("login-screen").style.display = "none";
+      document.getElementById("app-screen").style.display = "block";
+      updateKeysStatus();
+    } else {
+      document.getElementById("login-error").style.display = "block";
+    }
+  }
+
+  document.getElementById("access-key").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") checkAccess();
+  });
 </script>
 </body>
 </html>
